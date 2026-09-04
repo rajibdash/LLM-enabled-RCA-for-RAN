@@ -85,7 +85,7 @@ These inputs are heterogeneous, so the first design requirement is to normalize 
 
 ### 2. Evidence Collection and Correlation
 
-A diagnosis engine must correlate events across time and network layers. For example, a radio problem may appear as a KPI degradation, but the actual cause may be a transport issue, a configuration drift, or a core network anomaly. Therefore, the framework explicitly emphasizes multi-layer correlation rather than isolated symptom analysis.
+A __diagnosis engine__ must correlate events across time and network layers. For example, a radio problem may appear as a __KPI degradation__, but the actual cause may be a transport issue, a configuration drift/change, or a core network anomaly etc. Therefore, the framework explicitly emphasizes multi-layer correlation rather than isolated symptom analysis.
 
 Design-wise, this means the system should:
 
@@ -119,12 +119,12 @@ This component is important because RCA in telecom networks is often ambiguous, 
 
 ### 5. Evidence-Grounded Verification
 
-A central design principle of the paper is that each candidate cause must be validated against evidence. The LLM is not simply asked to produce an answer; it is guided to check whether the hypothesis matches the observed alarms, metrics, topology, and service impact. This creates a feedback loop in which candidate diagnoses are scored or ranked based on supporting evidence.
+A central design principle of the paper is that **each candidate cause must be validated against evidence**. The LLM is not simply asked to produce an answer, it is guided to check whether the hypothesis matches the observed alarms, metrics, topology, and service impact. This creates a **feedback loop** in which candidate diagnoses are scored or ranked based on supporting evidence.
 
 In practice, the verification step may include:
 
 - confirming temporal alignment,
-- checking whether the suspected layer is consistent with KPI trends,
+- checking whether the suspected layer (L3/L2/L1) is consistent with KPI trends,
 - comparing with historical incidents,
 - and identifying contradictions in the available evidence.
 
