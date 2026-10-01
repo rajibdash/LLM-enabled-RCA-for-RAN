@@ -6,7 +6,7 @@
 # reported in the paper's case study (Section 5.1 of AI-ML-or-LLM-RCA.md).
 
 model:
-  name: "qwen2.5-1.5b-instruct"
+  name: "Qwen2.5-1.5B-Instruct"
   provider: "local"           # e.g. "local", "openai", "azure", "bedrock"
   temperature: 0.1
   max_tokens: 1024

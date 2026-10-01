@@ -38,6 +38,50 @@ def test_run_diagnostic_checks_respects_custom_thresholds():
     assert checks["speed_check"] is False
 
 
+def test_run_diagnostic_checks_detects_interference():
+    group = _group_with_attributes(pci_mod_collision=True)
+    checks = run_diagnostic_checks(group)
+    assert checks["interference_check"] is True
+
+
+def test_run_diagnostic_checks_no_interference_without_collision():
+    group = _group_with_attributes(pci_mod_collision=False)
+    checks = run_diagnostic_checks(group)
+    assert checks["interference_check"] is False
+
+
+def test_run_diagnostic_checks_detects_transport_cross_layer_issue():
+    group = EvidenceGroup(entity_id="cell-0")
+    group.add(
+        Evidence(
+            source="test",
+            evidence_type=EvidenceType.KPI,
+            entity_id="cell-0",
+            timestamp=datetime(2026, 1, 1, 0, 0, 0),
+            layer=EvidenceLayer.PHYSICAL,
+        )
+    )
+    group.add(
+        Evidence(
+            source="test",
+            evidence_type=EvidenceType.KPI,
+            entity_id="cell-0",
+            timestamp=datetime(2026, 1, 1, 0, 0, 5),
+            layer=EvidenceLayer.TRANSPORT,
+        )
+    )
+
+    checks = run_diagnostic_checks(group)
+
+    assert checks["transport_check"] is True
+
+
+def test_run_diagnostic_checks_no_transport_issue_without_cross_layer_evidence():
+    group = _group_with_attributes()  # single physical-layer evidence item only
+    checks = run_diagnostic_checks(group)
+    assert checks["transport_check"] is False
+
+
 def test_generate_hypotheses_downtilt_case_matches_paper_example():
     # Reproduces the paper's illustrative SEKA-FT sample (ID 92TVA88GDA):
     # all mobility/RB/handover/distance checks are False, so the dominant
