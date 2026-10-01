@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "source": "engineering_db",
+      "entity_id": "cell-0",
+      "timestamp": "2026-01-01T00:00:00",
+      "type": "engineering_parameter",
+      "layer": "physical",
+      "mechanical_downtilt_deg": 30,
+      "digital_tilt_deg": 9,
+      "mechanical_azimuth_deg": 60
+    },
+    {
+      "source": "drive_test",
+      "entity_id": "cell-0",
+      "timestamp": "2026-01-01T00:00:05",
+      "type": "kpi",
+      "layer": "physical",
+      "downlink_throughput_mbps": 420.88,
+      "serving_ss_rsrp_dbm": -94.67,
+      "serving_ss_sinr_db": 8.43,
+      "scheduled_rbs": 177.0,
+      "ue_speed_kmh": 38.0,
+      "ue_distance_km": 0.0856,
+      "handover_count": 1
+    },
+    {
+      "source": "oss_alarms",
+      "entity_id": "cell-0",
+      "timestamp": "2026-01-01T00:00:10",
+      "type": "alarm",
+      "layer": "physical",
+      "description": "Downlink throughput below 600 Mbps threshold"
+    }
+  ]
+}
