@@ -1,0 +1,33 @@
+# Example LLM configuration for the RCA pipeline.
+#
+# This file is a placeholder/reference configuration for wiring a real LLM
+# backend into src/prompts and src/reasoning in place of (or alongside) the
+# rule-based ReasoningEngine. It mirrors the model/training settings
+# reported in the paper's case study (Section 5.1 of AI-ML-or-LLM-RCA.md).
+
+model:
+  name: "Qwen2.5-1.5B-Instruct"
+  provider: "local"           # e.g. "local", "openai", "azure", "bedrock"
+  temperature: 0.1
+  max_tokens: 1024
+  top_p: 0.9
+
+fine_tuning:
+  method: "seka-ft"           # structured evidence- and knowledge-aligned fine-tuning
+  lora:
+    enabled: true
+    target_blocks: 4          # last N transformer blocks
+  optimizer: "adamw"
+  learning_rate: 1.0e-5
+  epochs: 12
+  batch_size: 2
+  max_sequence_length: 2048
+  precision: "bf16"
+
+retrieval:
+  top_k: 3
+  backend: "in_memory_keyword" # see src/retrieval/retriever.py
+
+reasoning:
+  decision_path_control: true   # enforce staged diagnostic checks before a final label
+  evidence_grounded_explanations: true
