@@ -7,10 +7,13 @@ topology/config metadata, tickets) is normalized into the common
 """
 from __future__ import annotations
 
+import logging
 from datetime import datetime
 from typing import Any, Dict, Iterable, List
 
 from src.common.models import Evidence, EvidenceLayer, EvidenceType
+
+logger = logging.getLogger(__name__)
 
 # Maps a raw record's "type" field to the canonical EvidenceType.
 _TYPE_ALIASES = {
@@ -91,14 +94,17 @@ def normalize_record(record: Dict[str, Any]) -> Evidence:
 def normalize_records(records: Iterable[Dict[str, Any]]) -> List[Evidence]:
     """Normalize a batch of raw records into a list of ``Evidence``.
 
-    Records that cannot be parsed (missing required fields) are skipped
-    rather than raising, since ingestion must be resilient to messy,
-    heterogeneous operator data.
+    Records that cannot be parsed (missing required fields, bad
+    timestamps, etc.) are skipped rather than raising, since ingestion
+    must be resilient to messy, heterogeneous operator data. Each skipped
+    record is logged as a warning (including the reason and a preview of
+    the offending record) so data-quality issues remain diagnosable.
     """
     normalized: List[Evidence] = []
     for record in records:
         try:
             normalized.append(normalize_record(record))
-        except (ValueError, TypeError):
+        except (ValueError, TypeError) as exc:
+            logger.warning("Skipping unparsable ingestion record (%s): %r", exc, record)
             continue
     return normalized

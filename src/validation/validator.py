@@ -56,7 +56,13 @@ def verify_hypothesis(
         layer_penalty = 0.0
 
     hypothesis.score = max(0.0, hypothesis.score - ambiguity_penalty - layer_penalty)
-    hypothesis.verified = hypothesis.score >= VERIFICATION_THRESHOLD
+    # A hypothesis can only be verified if its score clears the threshold
+    # AND there is no unresolved contradicting evidence (e.g. no evidence
+    # was observed at its declared layer).
+    hypothesis.verified = (
+        hypothesis.score >= VERIFICATION_THRESHOLD
+        and not hypothesis.contradicting_evidence
+    )
     return hypothesis
 
 
