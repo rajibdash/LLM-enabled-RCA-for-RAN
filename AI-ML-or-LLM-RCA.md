@@ -1,9 +1,5 @@
 # Large Language Models (LLMs) for Telecom Root Cause Analysis (RCA): A Structured Reasoning Framework for Evidence-Grounded Diagnosis
 
-*This work has been accepted by IEEE Wireless Communications Magazine.*
-
-**Authors:** Hao Zhou, Mandar Kulkarni, Hao Chen, Yan Xin, and Charlie (Jianzhong) Zhang, Fellow, IEEE — Samsung Research America
-
 **Index Terms:** Large language models (LLMs), root cause analysis (RCA), telecom networks, structured reasoning.
 
 ---
