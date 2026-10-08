@@ -26,27 +26,27 @@ LLM-enabled-RCA-for-RAN/
 │   ├── architecture.md       # Module-level architecture
 │   └── rca-workflow.md       # End-to-end runtime workflow
 ├── src/
-│   ├── common/                # Shared data models (Evidence, RootCauseHypothesis, ...)
-│   ├── ingestion/              # Normalizes heterogeneous telemetry
-│   ├── correlation/            # Cross-layer / cross-time evidence correlation
-│   ├── retrieval/               # Knowledge base retrieval (RAG-style grounding)
-│   ├── prompts/                 # Prompt templates / explanation builders
-│   ├── reasoning/                # Candidate root-cause generation & ranking
-│   ├── validation/               # Evidence-grounded hypothesis verification
-│   └── api/                      # Pipeline entry point & CLI
+│   ├── common/               # Shared data models (Evidence, RootCauseHypothesis, ...)
+│   ├── ingestion/            # Normalizes heterogeneous telemetry
+│   ├── correlation/          # Cross-layer / cross-time evidence correlation
+│   ├── retrieval/            # Knowledge base retrieval (RAG-style grounding)
+│   ├── prompts/              # Prompt templates / explanation builders
+│   ├── reasoning/            # Candidate root-cause generation & ranking
+│   ├── validation/           # Evidence-grounded hypothesis verification
+│   └── api/                  # Pipeline entry point & CLI
 ├── models/
-│   └── llm-config/             # Example LLM configuration
+│   └── llm-config/           # Example LLM configuration
 ├── notebooks/
-│   └── experiments.ipynb       # Lightweight experimentation notebook
+│   └── experiments.ipynb     # Lightweight experimentation notebook
 ├── scripts/
-│   └── run_pipeline.sh         # Run the pipeline from the command line
+│   └── run_pipeline.sh       # Run the pipeline from the command line
 └── tests/
-    ├── fixtures/                # Sample evidence data
-    ├── test_ingestion.py
-    ├── test_correlation.py
-    ├── test_reasoning.py
-    ├── test_validation.py
-    └── test_pipeline.py        # End-to-end smoke test
+    ├── fixtures/             # Sample evidence data
+    ├── test_ingestion.py     # Data ingestion
+    ├── test_correlation.py   # co-relation among those evidence
+    ├── test_reasoning.py     # Root cause reasoning
+    ├── test_validation.py    # Evidence grounded verifications
+    └── test_pipeline.py      # End-to-end smoke test
 ```
 
 ## Quick Start
