@@ -43,7 +43,7 @@ LLM-enabled-RCA-for-RAN/
 └── tests/
     ├── fixtures/             # Sample evidence data
     ├── test_ingestion.py     # Data ingestion
-    ├── test_correlation.py   # co-relation among those evidence
+    ├── test_correlation.py   # correlation among those evidence
     ├── test_reasoning.py     # Root cause reasoning
     ├── test_validation.py    # Evidence grounded verifications
     └── test_pipeline.py      # End-to-end smoke test
